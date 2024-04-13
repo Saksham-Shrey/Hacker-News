@@ -13,30 +13,36 @@ struct NewsModel: Codable {
 
 
 struct News: Codable, Identifiable {
-    var id: String {
-        return objectID
+    var id: Int {
+        return story_id
     }
-    var objectID: String
-    var _highlightResult: HighlightResult
+    
+    var story_id: Int
+    var author: String
+    var title: String
+    var url: String?
     var points: Int
-}
-
-struct HighlightResult: Codable {
-    var author: Author
-    var title: Title
-    var url: Url
+    
 }
 
 
-struct Author: Codable {
-    var value: String
+struct TopStory: Codable, Identifiable {
+    var id: Int
+    var by: String
+    var title: String
+    var url: String?
+    var score: Int
+    
 }
-
-struct Title: Codable {
-    var value: String
-}
-
-struct Url: Codable {
-    var value: String
-}
-
+//
+//struct HighlightResult: Codable {
+//    var url: Url
+//}
+//
+//struct Url: Codable {
+//    var value: String
+//}
+//
+//struct Author: Codable {
+//    var author: String
+//}

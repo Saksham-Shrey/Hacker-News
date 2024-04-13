@@ -11,23 +11,58 @@ import Alamofire
 
 class NewsManager: ObservableObject {
     
-  @Published var news = [News]()
+    @Published var frontPageNews = [News]()
+    @Published var topStories = [TopStory]()
     
-    func fetchNews() {
-        AF.request("http://hn.algolia.com/api/v1/search?tags=front_page").responseDecodable(of: NewsModel.self) { response in
-
-                    switch response.result {
-                        
-                    case .success(let receivedNews):
-                        DispatchQueue.main.async {
-                            self.news = receivedNews.hits
+    func fetchFrontPageNews() {
+        AF.request("https://hn.algolia.com/api/v1/search?tags=front_page").responseDecodable(of: NewsModel.self) { response in
+            
+            switch response.result {
+                
+            case .success(let receivedNews):
+                DispatchQueue.main.async {
+                    self.frontPageNews = receivedNews.hits
+                }
+                
+            case .failure(let receivedError):
+                print("Error in NewsManager.fetchNews() => \(receivedError.localizedDescription)")
+                
+            }
+        }
+        
+    }
+    
+    func fetchTopStories() {
+        AF.request("http://hacker-news.firebaseio.com/v0/topstories.json").responseDecodable(of: [Int].self) { response in
+            
+            switch response.result {
+                
+            case .success(let receivedNews):
+                DispatchQueue.main.async {
+                    for story in receivedNews {
+                        AF.request("https://hacker-news.firebaseio.com/v0/item/\(story).json").responseDecodable(of: TopStory.self) { response in
+                            
+                            switch response.result {
+                                
+                            case .success(let receivedNews):
+                                DispatchQueue.main.async {
+                                    self.topStories.append(receivedNews)
+                                }
+                                
+                            case .failure(let receivedError):
+                                print("Error in NewsManager.fetchTopStories-nested() => \(receivedError.localizedDescription)")
+                                
+                            }
                         }
                         
-                    case .failure(let receivedError):
-                         print("Error in NewsManager.fetchNews() => \(receivedError.localizedDescription)")
-                      
                     }
                 }
-
+                
+            case .failure(let receivedError):
+                print("Error in NewsManager.fetchTopStories() => \(receivedError.localizedDescription)")
+                
+            }
+        }
+        
     }
 }
