@@ -21,7 +21,6 @@
 		27178CE917B951149D74F61E /* Pods-Hacker News.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hacker News.release.xcconfig"; path = "Target Support Files/Pods-Hacker News/Pods-Hacker News.release.xcconfig"; sourceTree = "<group>"; };
 		2D4EA557E92465EE3B2986EA /* Pods-Hacker News.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hacker News.debug.xcconfig"; path = "Target Support Files/Pods-Hacker News/Pods-Hacker News.debug.xcconfig"; sourceTree = "<group>"; };
 		3F45105A0DB6B38595EE5652 /* Pods_Hacker_News.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hacker_News.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E913592E2BCA7C1D002002C5 /* Tests.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tests.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E924B5E12BC11E3300264DB0 /* Hacker News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hacker News.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E924B5E42BC11E3300264DB0 /* Hacker_NewsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hacker_NewsApp.swift; sourceTree = "<group>"; };
 		E924B5E62BC11E3300264DB0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,14 +60,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E913592F2BCA7CD9002002C5 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				E913592E2BCA7C1D002002C5 /* Tests.playground */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
 		E924B5D82BC11E3300264DB0 = {
 			isa = PBXGroup;
 			children = (
@@ -90,7 +81,6 @@
 		E924B5E32BC11E3300264DB0 /* Hacker News */ = {
 			isa = PBXGroup;
 			children = (
-				E913592F2BCA7CD9002002C5 /* Tests */,
 				E9DA56032BC8E52600C414DA /* App */,
 				E924B5F42BC2C0D000264DB0 /* Models */,
 				E9DA56042BC8E53000C414DA /* Views */,
