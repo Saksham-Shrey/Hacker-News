@@ -34,15 +34,4 @@ struct TopStory: Codable, Identifiable {
     var score: Int
     
 }
-//
-//struct HighlightResult: Codable {
-//    var url: Url
-//}
-//
-//struct Url: Codable {
-//    var value: String
-//}
-//
-//struct Author: Codable {
-//    var author: String
-//}
+
