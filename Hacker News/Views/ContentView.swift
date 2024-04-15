@@ -31,7 +31,7 @@ struct ContentView: View {
                 }
                 .tag(1)
             
-            SearchView(newsManager: newsManager)
+            SearchNewsView(newsManager: newsManager)
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Search")
@@ -123,22 +123,19 @@ struct TopStoriesView: View {
     }
 }
 
-struct SearchView: View {
+struct SearchNewsView: View {
     
     @ObservedObject var newsManager: NewsManager
     @State var str = ""
-    @State var isSubmitted = false
     
     var body: some View {
         
-        if !isSubmitted {
+        NavigationView(content: {
             VStack {
                 TextField(
                     "Enter Search Query",
                     text: $newsManager.query,
                     onCommit: {
-                        querySent()
-                        print(newsManager.query)
                     }
                 )
                 .font(.custom("Impact", size: 24))
@@ -158,72 +155,77 @@ struct SearchView: View {
                         )
                 )
                 
-                
                 Button(action: {
-                    querySent()
                 }, label: {
-                    Text("Search")
-                        .font(.custom("MarkerFelt-Wide", size: 20))
-                        .frame(width: 60, height: 60, alignment: .center)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .foregroundStyle(Color.brown)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color.secondary)
-                                .frame(width: 80, height: 40)
-                        )
+                    NavigationLink(destination: SearchedNewsView(newsManager: newsManager)) {
+                        Text("Search")
+                            .font(.custom("MarkerFelt-Wide", size: 20))
+                            .frame(width: 60, height: 60, alignment: .center)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .foregroundStyle(Color.brown)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color.secondary)
+                                    .frame(width: 80, height: 40)
+                            )
+                    }
                 })
                 .padding()
             }
-        } else {
-            NavigationView {
-                List(newsManager.searchNews) { story in
-                    NavigationLink(destination: WebView(url: story.url ?? "https://sakshamshrey.bio.link")) {                  VStack(alignment: .leading) {
-                        HStack(alignment: .top) {
-                            Text(story.title)
-                            
-                            Spacer()
-                            
-                            Text(String(story.points))
-                                .font(.caption)
-                                .frame(width: 45, height: 30)
-                                .foregroundColor(.secondary)
-                                .shadow(radius: 20)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 30)
-                                        .fill(Color.gray.opacity(0.08))
-                                )
-                            
-                        }
-                        Text("By: \(story.author)")
-                            .font(.caption)
-                            .foregroundStyle(.gray)
-                    }
-                    }
-                    
-                }
-                .navigationTitle(newsManager.query)
-            }
-            .onAppear {
-                self.newsManager.fetchSearchNews()
-            }
-            .onDisappear {
+        })
+        
+        
+    }
+    
+}
 
+
+
+
+struct SearchedNewsView: View {
+    
+    @ObservedObject var newsManager: NewsManager
+    
+    var body: some View {
+        NavigationView {
+            List(newsManager.searchNews) { story in
+                NavigationLink(destination: WebView(url: story.url ?? "https://sakshamshrey.bio.link")) {                  VStack(alignment: .leading) {
+                    HStack(alignment: .top) {
+                        Text(story.title)
+                        
+                        Spacer()
+                        
+                        Text(String(story.points))
+                            .font(.caption)
+                            .frame(width: 45, height: 30)
+                            .foregroundColor(.secondary)
+                            .shadow(radius: 20)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 30)
+                                    .fill(Color.gray.opacity(0.08))
+                            )
+                        
+                    }
+                    Text("By: \(story.author)")
+                        .font(.caption)
+                        .foregroundStyle(.gray)
+                }
+                }
+                
             }
+            .navigationTitle(newsManager.query)
+        }
+        .onAppear {
+            self.newsManager.fetchSearchNews()
+        }
+        .onDisappear {
             
         }
-        
-        
-    }
-    func querySent() {
-        self.isSubmitted = true
     }
 }
+
 
 
 #Preview {
     ContentView()
 }
-
-
-
