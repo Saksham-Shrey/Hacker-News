@@ -13,6 +13,8 @@ class NewsManager: ObservableObject {
     
     @Published var frontPageNews = [News]()
     @Published var topStories = [TopStory]()
+    @Published var searchNews = [News]()
+    @Published var query = ""
     
     func fetchFrontPageNews() {
         AF.request("https://hn.algolia.com/api/v1/search?tags=front_page").responseDecodable(of: NewsModel.self) { response in
@@ -60,6 +62,24 @@ class NewsManager: ObservableObject {
                 
             case .failure(let receivedError):
                 print("Error in NewsManager.fetchTopStories() => \(receivedError.localizedDescription)")
+                
+            }
+        }
+        
+    }
+    
+    func fetchSearchNews() {
+        AF.request("https://hn.algolia.com/api/v1/search?query=\(query)").responseDecodable(of: NewsModel.self) { response in
+            
+            switch response.result {
+                
+            case .success(let receivedNews):
+                DispatchQueue.main.async {
+                    self.searchNews = receivedNews.hits
+                }
+                
+            case .failure(let receivedError):
+                print("Error in NewsManager.fetchSearchNews() => \(receivedError.localizedDescription)")
                 
             }
         }
