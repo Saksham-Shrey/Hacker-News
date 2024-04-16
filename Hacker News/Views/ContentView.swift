@@ -174,7 +174,6 @@ struct SearchNewsView: View {
             }
         })
         
-        
     }
     
 }
