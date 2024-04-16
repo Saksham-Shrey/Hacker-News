@@ -9,8 +9,8 @@ Hacker News is a mobile application built using SwiftUI and Alamofire that allow
 
 ## Features
 
-- Browse top stories, newest stories, and best stories from Hacker News.
-- View story details including title, author, score, number of comments, and time posted.
+- Browse top stories, newest stories, and search stories from Hacker News.
+- View story details including title, author, and popularity score.
 - Open the original story link in a web browser for further reading.
 - Refresh the news feed to fetch the latest stories.
 
@@ -19,6 +19,13 @@ Hacker News is a mobile application built using SwiftUI and Alamofire that allow
 <img src="https://github.com/Saksham-Shrey/Hacker-News/assets/110986726/9d7f897f-8223-46af-a811-4c24dd61d0d7" width="200">
 <img src="https://github.com/Saksham-Shrey/Hacker-News/assets/110986726/dbb7168f-fd02-45df-b66e-4343320291db" width="200">
 <img src="https://github.com/Saksham-Shrey/Hacker-News/assets/110986726/b79ce3c1-d987-44ed-8304-a2d7cf13d8cb" width="200">
+<img src="https://github.com/Saksham-Shrey/Hacker-News/assets/110986726/d1c88cf2-448c-4742-ae30-dbe2e64d61be" width="200">
+<img src="https://github.com/Saksham-Shrey/Hacker-News/assets/110986726/b6e6a8f1-4362-4313-a00c-6c823892a2ef" width="200">
+<img src="https://github.com/Saksham-Shrey/Hacker-News/assets/110986726/6090fa2d-8fbc-423d-af6d-addc83697460" width="200">
+
+
+
+
 
 
 
